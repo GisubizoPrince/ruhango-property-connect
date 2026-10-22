@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: ruhango-property-connect
+    runtime: node
+    plan: free
+    buildCommand: npm ci --prefix server && npm ci --prefix client && npm --prefix client run build
+    startCommand: npm --prefix server start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        value: ruhango_property_connect
+      - key: DB_SSL
+        sync: false
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
